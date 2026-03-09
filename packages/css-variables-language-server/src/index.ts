@@ -196,7 +196,7 @@ connection.onCompletion(
       const insertText = isFunctionCall
         ? varSymbol.name
         : `var(${varSymbol.name})`;
-      
+
       const start = doc.positionAt(wordInfo.left + 1);
       const end = doc.positionAt(wordInfo.right);
       const range = { start, end };
@@ -210,7 +210,7 @@ connection.onCompletion(
         kind: isColor(varSymbol.value)
           ? CompletionItemKind.Color
           : CompletionItemKind.Variable,
-        sortText: 'z',
+        sortText: varSymbol.name.replace(/(.*?)(\d+)$/, (_, label, num) => label + num.padStart(4, '0'))
       };
 
       if (isColor(varSymbol.value)) {
